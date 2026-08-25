@@ -1,0 +1,76 @@
+<view class="container" wx:if="{{snapshot}}">
+  <view class="card">
+    <view class="detail-header">
+      <text class="nickname">{{snapshot.nickname || '匿名'}}</text>
+      <text class="date">{{snapshot.createdAt}}</text>
+    </view>
+
+    <view class="detail-images" wx:if="{{snapshot.images && snapshot.images.length > 0}}">
+      <image wx:for="{{snapshot.images}}" wx:key="*this" src="{{item}}" mode="widthFix" class="detail-image" bindtap="previewImage" data-idx="{{index}}" />
+    </view>
+
+    <view class="detail-text" wx:if="{{snapshot.text}}">{{snapshot.text}}</view>
+    <view class="detail-desc" wx:if="{{snapshot.imageDesc}}">
+      <text class="desc-label">图片描述：</text>{{snapshot.imageDesc}}
+    </view>
+
+    <view class="detail-tags" wx:if="{{snapshot.tags && snapshot.tags.length > 0}}">
+      <text class="tag" wx:for="{{snapshot.tags}}" wx:key="*this">{{item}}</text>
+    </view>
+
+    <view class="detail-summary" wx:if="{{snapshot.summary}}">
+      <text class="summary-label">AI摘要：</text>{{snapshot.summary}}
+    </view>
+  </view>
+
+  <view class="card">
+    <view class="section-title">AI发圈文案</view>
+    <button class="btn-secondary action-btn" bindtap="generateCaptions" disabled="{{loading}}">生成3条文案</button>
+    <view class="caption-list" wx:if="{{captions.length > 0}}">
+      <view class="caption-item" wx:for="{{captions}}" wx:key="index" bindtap="copyText" data-text="{{item}}">
+        <text class="caption-text">{{item}}</text>
+        <text class="copy-hint">点击复制</text>
+      </view>
+    </view>
+  </view>
+
+  <view class="card">
+    <view class="section-title">灵感萃取</view>
+    <button class="btn-secondary action-btn" bindtap="extractInspiration" disabled="{{loading}}">分析可借鉴之处</button>
+    <view class="inspiration-box" wx:if="{{inspiration}}">
+      <view class="inspiration-section" wx:if="{{inspiration.viewpoints && inspiration.viewpoints.length > 0}}">
+        <text class="inspiration-label">核心观点：</text>
+        <view class="inspiration-item" wx:for="{{inspiration.viewpoints}}" wx:key="index">• {{item}}</view>
+      </view>
+      <view class="inspiration-section" wx:if="{{inspiration.writingStyle}}">
+        <text class="inspiration-label">写作风格：</text>
+        <text>{{inspiration.writingStyle}}</text>
+      </view>
+      <view class="inspiration-section" wx:if="{{inspiration.reusablePattern}}">
+        <text class="inspiration-label">可复用模式：</text>
+        <text>{{inspiration.reusablePattern}}</text>
+      </view>
+    </view>
+  </view>
+
+  <view class="card">
+    <view class="section-title">风格仿写</view>
+    <view class="imitate-tip">选一张你自己的新图，AI参考这条朋友圈的风格写文案</view>
+    <button class="btn-secondary action-btn" bindtap="imitateStyle" disabled="{{loading}}">选择新图并仿写</button>
+    <view class="caption-list" wx:if="{{imitatedCaptions.length > 0}}">
+      <view class="caption-item" wx:for="{{imitatedCaptions}}" wx:key="index" bindtap="copyText" data-text="{{item}}">
+        <text class="caption-text">{{item}}</text>
+        <text class="copy-hint">点击复制</text>
+      </view>
+    </view>
+  </view>
+
+  <button class="btn-delete" bindtap="deleteSnapshot">删除这条灵感</button>
+</view>
+
+<view class="loading-mask" wx:if="{{loading}}">
+  <view class="loading-box">
+    <view class="loading-spinner"></view>
+    <view class="loading-text">{{loadingText}}</view>
+  </view>
+</view>

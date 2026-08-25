@@ -1,0 +1,38 @@
+<view class="container">
+  <view class="search-bar">
+    <input class="search-input" placeholder="搜索朋友圈内容、标签、昵称..." value="{{keyword}}" bindinput="onSearch" />
+  </view>
+
+  <scroll-view class="tag-bar" scroll-x wx:if="{{tags.length > 0}}">
+    <view class="tag-item {{activeTag === '' ? 'active' : ''}}" bindtap="onTagTap" data-tag="">全部</view>
+    <view class="tag-item {{activeTag === item ? 'active' : ''}}" wx:for="{{tags}}" wx:key="*this" bindtap="onTagTap" data-tag="{{item}}">{{item}}</view>
+  </scroll-view>
+
+  <view class="snapshot-list" wx:if="{{filteredSnapshots.length > 0}}">
+    <view class="card snapshot-card" wx:for="{{filteredSnapshots}}" wx:key="id" bindtap="goDetail" data-id="{{item.id}}">
+      <view class="card-header">
+        <text class="nickname">{{item.nickname || '匿名'}}</text>
+        <text class="date">{{item.createdAt}}</text>
+      </view>
+      <view class="card-body">
+        <image wx:if="{{item.images && item.images[0]}}" class="thumb" src="{{item.images[0]}}" mode="aspectFill" />
+        <view class="text-content">
+          <text class="snapshot-text">{{item.text || item.imageDesc || item.summary}}</text>
+        </view>
+      </view>
+      <view class="card-footer" wx:if="{{item.tags && item.tags.length > 0}}">
+        <text class="tag" wx:for="{{item.tags}}" wx:for-item="tag" wx:key="*this">{{tag}}</text>
+      </view>
+      <view class="card-summary" wx:if="{{item.summary}}">
+        <text class="summary-label">AI摘要：</text>
+        <text class="summary-text">{{item.summary}}</text>
+      </view>
+    </view>
+  </view>
+
+  <view class="empty" wx:else>
+    <view class="empty-icon">📸</view>
+    <view class="empty-text">还没有收藏任何灵感</view>
+    <view class="empty-hint">去"收藏"页截图导入吧</view>
+  </view>
+</view>

@@ -1,0 +1,60 @@
+<view class="container">
+  <view class="card tip-card">
+    <view class="tip-title">使用说明</view>
+    <view class="tip-text">1. 截图保存朋友圈内容到相册</view>
+    <view class="tip-text">2. 选择截图，AI自动识别文字和图片</view>
+    <view class="tip-text">3. 确认信息后保存到灵感库</view>
+  </view>
+
+  <view class="card">
+    <view class="section-title">选择截图（最多9张）</view>
+    <view class="image-grid">
+      <view class="image-item" wx:for="{{images}}" wx:key="*this">
+        <image src="{{item}}" mode="aspectFill" class="grid-image" bindtap="previewImage" data-idx="{{index}}" />
+        <view class="image-remove" catchtap="removeImage" data-idx="{{index}}">×</view>
+      </view>
+      <view class="image-add" bindtap="chooseImage" wx:if="{{images.length < 9}}">
+        <text class="add-icon">+</text>
+        <text class="add-text">添加图片</text>
+      </view>
+    </view>
+  </view>
+
+  <button class="btn-primary" bindtap="analyzeImages" disabled="{{analyzing}}" wx:if="{{images.length > 0}}">
+    {{analyzing ? 'AI识别中...' : 'AI识别截图'}}
+  </button>
+
+  <view class="card" wx:if="{{showResult}}">
+    <view class="section-title">识别结果（可编辑）</view>
+    <input class="input-field" placeholder="发布者昵称" value="{{form.nickname}}" bindinput="onFormInput" data-field="nickname" />
+    <textarea class="input-field textarea" placeholder="朋友圈文字内容" value="{{form.text}}" bindinput="onFormInput" data-field="text" auto-height />
+    <textarea class="input-field textarea" placeholder="图片内容描述" value="{{form.imageDesc}}" bindinput="onFormInput" data-field="imageDesc" auto-height />
+
+    <view class="tag-edit">
+      <view class="tag-list">
+        <view class="tag" wx:for="{{form.tags}}" wx:key="*this">
+          {{item}}
+          <text class="tag-remove" catchtap="removeTag" data-idx="{{index}}">×</text>
+        </view>
+      </view>
+      <view class="tag-input-row">
+        <input class="input-field tag-input" placeholder="添加标签" value="{{tagInput}}" bindinput="onTagInput" bindconfirm="addTag" />
+        <button class="btn-secondary tag-add-btn" bindtap="addTag">添加</button>
+      </view>
+    </view>
+
+    <textarea class="input-field textarea" placeholder="一句话摘要" value="{{form.summary}}" bindinput="onFormInput" data-field="summary" auto-height />
+
+    <button class="btn-primary save-btn" bindtap="saveSnapshot">保存到灵感库</button>
+  </view>
+
+  <view class="card">
+    <view class="section-title">纯文字模式</view>
+    <view class="toggle-row" bindtap="toggleTextOnly">
+      <text>{{textOnly ? '已开启' : '关闭'}}</text>
+      <switch checked="{{textOnly}}" bindchange="toggleTextOnly" />
+    </view>
+    <textarea wx:if="{{textOnly}}" class="input-field textarea" placeholder="粘贴文字内容..." value="{{textOnlyContent}}" bindinput="onTextOnlyInput" auto-height />
+    <button wx:if="{{textOnly}}" class="btn-primary save-btn" bindtap="saveSnapshot">保存文字</button>
+  </view>
+</view>

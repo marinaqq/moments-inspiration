@@ -1,0 +1,57 @@
+<view class="container">
+  <view class="card stats-card">
+    <view class="stat-item">
+      <text class="stat-num">{{stats.total}}</text>
+      <text class="stat-label">收藏灵感</text>
+    </view>
+    <view class="stat-divider"></view>
+    <view class="stat-item">
+      <text class="stat-num">{{stats.tags}}</text>
+      <text class="stat-label">标签数</text>
+    </view>
+  </view>
+
+  <view class="card">
+    <view class="section-title" bindtap="toggleAdvanced">
+      自定义API配置
+      <text class="toggle-icon">{{showAdvanced ? '收起' : '展开'}}</text>
+    </view>
+    <view class="advanced-tip">默认使用内置免费API，无需配置。如有需要可使用自己的Key。</view>
+    <view wx:if="{{showAdvanced}}">
+      <view class="form-label">API Key</view>
+      <input class="input-field" placeholder="输入你自己的API Key（可选）" value="{{customKey}}" bindinput="onInput" data-field="customKey" password />
+
+      <view class="form-label">接口地址</view>
+      <input class="input-field" placeholder="留空使用默认地址" value="{{customUrl}}" bindinput="onInput" data-field="customUrl" />
+
+      <view class="form-label">模型名称</view>
+      <input class="input-field" placeholder="留空使用默认模型" value="{{customModel}}" bindinput="onInput" data-field="customModel" />
+
+      <button class="btn-primary save-config-btn" bindtap="saveConfig">保存自定义配置</button>
+      <button class="btn-secondary clear-config-btn" bindtap="clearConfig" wx:if="{{hasCustom}}">恢复默认配置</button>
+    </view>
+  </view>
+
+  <view class="card">
+    <view class="section-title">数据管理</view>
+    <view class="action-row" bindtap="exportData">
+      <text>导出数据（复制到剪贴板）</text>
+      <text class="arrow">›</text>
+    </view>
+    <view class="action-row" bindtap="importData">
+      <text>从剪贴板导入数据</text>
+      <text class="arrow">›</text>
+    </view>
+    <view class="action-row danger" bindtap="clearData">
+      <text>清空所有数据</text>
+      <text class="arrow">›</text>
+    </view>
+  </view>
+
+  <view class="card about-card">
+    <view class="section-title">关于</view>
+    <view class="about-text">灵感快照库 v1.0</view>
+    <view class="about-text">截图收藏朋友圈精彩内容，AI帮你识别、整理、创作。</view>
+    <view class="about-text">所有数据仅存储在本机，保护隐私。</view>
+  </view>
+</view>

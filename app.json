@@ -1,0 +1,36 @@
+{
+  "pages": [
+    "pages/index/index",
+    "pages/add/add",
+    "pages/detail/detail",
+    "pages/settings/settings"
+  ],
+  "window": {
+    "navigationBarBackgroundColor": "#1a1a2e",
+    "navigationBarTitleText": "灵感快照库",
+    "navigationBarTextStyle": "white",
+    "backgroundColor": "#f5f5f7"
+  },
+  "tabBar": {
+    "color": "#999999",
+    "selectedColor": "#6c5ce7",
+    "backgroundColor": "#ffffff",
+    "borderStyle": "black",
+    "list": [
+      {
+        "pagePath": "pages/index/index",
+        "text": "灵感库"
+      },
+      {
+        "pagePath": "pages/add/add",
+        "text": "收藏"
+      },
+      {
+        "pagePath": "pages/settings/settings",
+        "text": "我的"
+      }
+    ]
+  },
+  "sitemapLocation": "sitemap.json",
+  "style": "v2"
+}

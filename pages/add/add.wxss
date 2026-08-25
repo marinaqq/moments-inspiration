@@ -1,0 +1,118 @@
+.tip-card {
+  background: linear-gradient(135deg, #f0edff, #e8e4ff);
+}
+
+.tip-title {
+  font-size: 28rpx;
+  font-weight: 600;
+  color: #6c5ce7;
+  margin-bottom: 12rpx;
+}
+
+.tip-text {
+  font-size: 24rpx;
+  color: #666;
+  line-height: 1.8;
+}
+
+.image-grid {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 16rpx;
+}
+
+.image-item {
+  position: relative;
+  width: 200rpx;
+  height: 200rpx;
+}
+
+.grid-image {
+  width: 100%;
+  height: 100%;
+  border-radius: 12rpx;
+}
+
+.image-remove {
+  position: absolute;
+  top: -10rpx;
+  right: -10rpx;
+  width: 40rpx;
+  height: 40rpx;
+  background: rgba(0,0,0,0.6);
+  color: #fff;
+  border-radius: 50%;
+  text-align: center;
+  line-height: 36rpx;
+  font-size: 28rpx;
+}
+
+.image-add {
+  width: 200rpx;
+  height: 200rpx;
+  border: 2rpx dashed #ccc;
+  border-radius: 12rpx;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  color: #999;
+}
+
+.add-icon {
+  font-size: 60rpx;
+  line-height: 1;
+}
+
+.add-text {
+  font-size: 22rpx;
+  margin-top: 8rpx;
+}
+
+.textarea {
+  min-height: 80rpx;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.tag-edit {
+  margin-bottom: 20rpx;
+}
+
+.tag-list {
+  margin-bottom: 16rpx;
+}
+
+.tag .tag-remove {
+  margin-left: 8rpx;
+  color: #999;
+}
+
+.tag-input-row {
+  display: flex;
+  gap: 16rpx;
+  align-items: center;
+}
+
+.tag-input {
+  flex: 1;
+  margin-bottom: 0;
+}
+
+.tag-add-btn {
+  width: 120rpx;
+  padding: 16rpx 0;
+  font-size: 24rpx;
+}
+
+.save-btn {
+  margin-top: 20rpx;
+}
+
+.toggle-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 28rpx;
+  color: #666;
+}
